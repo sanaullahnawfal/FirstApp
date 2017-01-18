@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ProductViewController.parseJson(jsonData : [[String : Any]]?) -&gt; ():ProductViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(productDetails[0])">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProductViewController.(getJson(url : URL) -&gt; ()).(closure #1):ProductViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "products">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProductViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:ProductViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "productCell?.viewWithTag(1)">
+            </PersistentString>
+            <PersistentString
+               value = "products[indexPath.row]">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "products">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
