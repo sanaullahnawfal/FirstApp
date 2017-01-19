@@ -11,9 +11,11 @@ import UIKit
 class ContactViewController: UIViewController {
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        navigationItem.title = "Contact Us"
+        navigationController?.navigationBar.tintColor = UIColor(red: 141/255, green: 147/255, blue: 51/255, alpha: 1.0)
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
