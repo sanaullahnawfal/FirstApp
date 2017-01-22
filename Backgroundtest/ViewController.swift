@@ -35,6 +35,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return collectionView
     }()
     
+    let slideShowPageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.pageIndicatorTintColor = UIColor(white: 100/255, alpha: 1)
+        pageControl.currentPageIndicatorTintColor = UIColor(red: 255/255, green: 100/255, blue: 100/255, alpha: 1)
+        pageControl.numberOfPages = 4
+        return pageControl
+    }()
+    
     let cellIdentifier = "slideimage"
     
     var slideShowImages = [UIImage]()
@@ -44,8 +52,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         locationView.layer.cornerRadius     = locationView.frame.width/2
         locationView.layer.masksToBounds    = true
-        locationView.layer.borderWidth      = 1
-        locationView.layer.borderColor      = UIColor.white.cgColor
+        //locationView.layer.borderWidth      = 1
+        //locationView.layer.borderColor      = UIColor.white.cgColor
         
         slideShowView.register(SlideShowCell.self, forCellWithReuseIdentifier: cellIdentifier)
         slideShow.addSubview(slideShowView)
@@ -54,6 +62,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         slideShowView.bottomAnchor.constraint(equalTo: slideShow.bottomAnchor).isActive = true
         slideShowView.leftAnchor.constraint(equalTo: slideShow.leftAnchor).isActive = true
         slideShowView.rightAnchor.constraint(equalTo: slideShow.rightAnchor).isActive = true
+        
+        slideShow.addSubview(slideShowPageControl)
+        slideShowPageControl.translatesAutoresizingMaskIntoConstraints = false
+        slideShowPageControl.bottomAnchor.constraint(equalTo: slideShow.bottomAnchor).isActive = true
+        slideShowPageControl.leftAnchor.constraint(equalTo: slideShow.leftAnchor).isActive = true
+        slideShowPageControl.rightAnchor.constraint(equalTo: slideShow.rightAnchor).isActive = true
+        slideShowPageControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         styleCustomNavigationBar()
         
@@ -66,6 +81,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         offerGesture                        = registerGestureToView(view: offerView)
         productGesture                      = registerGestureToView(view: productsView)
         contactGesture                      = registerGestureToView(view: contactView)
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let pageNumber = Int(targetContentOffset.pointee.x/slideShow.frame.width)
+        slideShowPageControl.currentPage = pageNumber
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -130,7 +150,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let menuButton = UIButton(type: .system)
         menuButton.setImage(#imageLiteral(resourceName: "menubutton").withRenderingMode(.alwaysOriginal), for: .normal)
-        menuButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        menuButton.frame = CGRect(x: 0, y: 0, width: 25, height: 30)
         menuButton.tintColor = .none
         menuButton.contentMode = .scaleAspectFit
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: menuButton)
