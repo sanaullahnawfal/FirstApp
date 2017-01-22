@@ -30,6 +30,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         collectionView.isPagingEnabled = true
         return collectionView
     }()
@@ -41,8 +42,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        locationView.layer.cornerRadius     = 25
+        locationView.layer.cornerRadius     = locationView.frame.width/2
         locationView.layer.masksToBounds    = true
+        locationView.layer.borderWidth      = 1
+        locationView.layer.borderColor      = UIColor.white.cgColor
         
         slideShowView.register(SlideShowCell.self, forCellWithReuseIdentifier: cellIdentifier)
         slideShow.addSubview(slideShowView)
