@@ -49,7 +49,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var timer = Timer()
     
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -77,8 +76,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         fetchSlideShowImages()
         
-        timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
-        
         locationGesture                     = registerGestureToView(view: locationView)
         newArrivalGesture                   = registerGestureToView(view: newArrivalView)
         offerGesture                        = registerGestureToView(view: offerView)
@@ -86,8 +83,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         contactGesture                      = registerGestureToView(view: contactView)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         timer.invalidate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -97,7 +98,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let pageNumber = Int(targetContentOffset.pointee.x/slideShow.frame.width)
         slideShowPageControl.currentPage = pageNumber
-        timer.fire()
+        timer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
     }
     
     
