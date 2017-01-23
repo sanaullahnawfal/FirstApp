@@ -36,45 +36,48 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }()
     
     let slideShowPageControl: UIPageControl = {
-        let pageControl = UIPageControl()
-        pageControl.pageIndicatorTintColor = UIColor(white: 100/255, alpha: 1)
-        pageControl.currentPageIndicatorTintColor = UIColor(red: 255/255, green: 100/255, blue: 100/255, alpha: 1)
-        pageControl.numberOfPages = 4
+        let pageControl                             = UIPageControl()
+        pageControl.pageIndicatorTintColor          = UIColor(white: 100/255, alpha: 1)
+        pageControl.currentPageIndicatorTintColor   = UIColor(red: 255/255, green: 100/255, blue: 100/255, alpha: 1)
+        pageControl.numberOfPages                   = 4
         return pageControl
     }()
     
-    let cellIdentifier = "slideimage"
+    let cellIdentifier  = "slideimage"
     
     var slideShowImages = [UIImage]()
+    
+    var timer = Timer()
+    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        locationView.layer.cornerRadius     = locationView.frame.width/2
-        locationView.layer.masksToBounds    = true
-        //locationView.layer.borderWidth      = 1
-        //locationView.layer.borderColor      = UIColor.white.cgColor
+        locationView.layer.cornerRadius         = locationView.frame.width/2
+        locationView.layer.masksToBounds        = true
+        //locationView.layer.borderWidth        = 1
+        //locationView.layer.borderColor        = UIColor.white.cgColor
         
         slideShowView.register(SlideShowCell.self, forCellWithReuseIdentifier: cellIdentifier)
         slideShow.addSubview(slideShowView)
-        slideShowView.translatesAutoresizingMaskIntoConstraints = false
-        slideShowView.topAnchor.constraint(equalTo: slideShow.topAnchor).isActive = true
-        slideShowView.bottomAnchor.constraint(equalTo: slideShow.bottomAnchor).isActive = true
-        slideShowView.leftAnchor.constraint(equalTo: slideShow.leftAnchor).isActive = true
-        slideShowView.rightAnchor.constraint(equalTo: slideShow.rightAnchor).isActive = true
+        slideShowView.translatesAutoresizingMaskIntoConstraints                                 = false
+        slideShowView.topAnchor.constraint(equalTo: slideShow.topAnchor).isActive               = true
+        slideShowView.bottomAnchor.constraint(equalTo: slideShow.bottomAnchor).isActive         = true
+        slideShowView.leftAnchor.constraint(equalTo: slideShow.leftAnchor).isActive             = true
+        slideShowView.rightAnchor.constraint(equalTo: slideShow.rightAnchor).isActive           = true
         
         slideShow.addSubview(slideShowPageControl)
-        slideShowPageControl.translatesAutoresizingMaskIntoConstraints = false
-        slideShowPageControl.bottomAnchor.constraint(equalTo: slideShow.bottomAnchor).isActive = true
-        slideShowPageControl.leftAnchor.constraint(equalTo: slideShow.leftAnchor).isActive = true
-        slideShowPageControl.rightAnchor.constraint(equalTo: slideShow.rightAnchor).isActive = true
-        slideShowPageControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        slideShowPageControl.translatesAutoresizingMaskIntoConstraints                          = false
+        slideShowPageControl.bottomAnchor.constraint(equalTo: slideShow.bottomAnchor).isActive  = true
+        slideShowPageControl.leftAnchor.constraint(equalTo: slideShow.leftAnchor).isActive      = true
+        slideShowPageControl.rightAnchor.constraint(equalTo: slideShow.rightAnchor).isActive    = true
+        slideShowPageControl.heightAnchor.constraint(equalToConstant: 40).isActive              = true
         
         styleCustomNavigationBar()
         
         fetchSlideShowImages()
         
-        slideShowView.reloadData()
+        timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
         
         locationGesture                     = registerGestureToView(view: locationView)
         newArrivalGesture                   = registerGestureToView(view: newArrivalView)
@@ -83,10 +86,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         contactGesture                      = registerGestureToView(view: contactView)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        timer.invalidate()
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        timer.invalidate()
+    }
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let pageNumber = Int(targetContentOffset.pointee.x/slideShow.frame.width)
         slideShowPageControl.currentPage = pageNumber
+        timer.fire()
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return slideShowImages.count
@@ -136,6 +149,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             slideShowImages.append(image)
         }
         
+    }
+    
+    func autoScroll() {
+        var indexPath = IndexPath()
+        if(slideShowPageControl.currentPage == slideShowImages.count - 1) {
+            indexPath = IndexPath(item: 0, section: 0)
+            slideShowView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            slideShowPageControl.currentPage = 0
+        } else {
+            indexPath = IndexPath(item: slideShowPageControl.currentPage + 1, section: 0)
+            slideShowView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            slideShowPageControl.currentPage += 1
+        }
     }
     
     private func styleCustomNavigationBar() {
