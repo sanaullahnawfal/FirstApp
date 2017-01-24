@@ -44,19 +44,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }()
     
     let cellIdentifier  = "slideimage"
-    
     var slideShowImages = [UIImage]()
-    
     var timer = Timer()
-    
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         locationView.layer.cornerRadius         = locationView.frame.width/2
         locationView.layer.masksToBounds        = true
-        //locationView.layer.borderWidth        = 1
-        //locationView.layer.borderColor        = UIColor.white.cgColor
         
         slideShowView.register(SlideShowCell.self, forCellWithReuseIdentifier: cellIdentifier)
         slideShow.addSubview(slideShowView)
@@ -77,8 +72,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         fetchSlideShowImages()
         
-        timer = Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
-        
         locationGesture                     = registerGestureToView(view: locationView)
         newArrivalGesture                   = registerGestureToView(view: newArrivalView)
         offerGesture                        = registerGestureToView(view: offerView)
@@ -86,8 +79,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         contactGesture                      = registerGestureToView(view: contactView)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         timer.invalidate()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        timer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -97,7 +94,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         let pageNumber = Int(targetContentOffset.pointee.x/slideShow.frame.width)
         slideShowPageControl.currentPage = pageNumber
-        timer.fire()
+        timer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
     }
     
     
@@ -130,7 +127,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         case offerGesture:
             performSegue(withIdentifier: "offer", sender: sender)
         case productGesture:
-            performSegue(withIdentifier: "product", sender: sender)
+            let layout = UICollectionViewFlowLayout()
+            let categoryView = CategoryViewController(collectionViewLayout: layout)
+            navigationController?.pushViewController(categoryView, animated: true)
+            //performSegue(withIdentifier: "product", sender: sender)
         case contactGesture:
             performSegue(withIdentifier: "contact", sender: sender)
         default:

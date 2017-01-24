@@ -3,10 +3,27 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ProductViewController.parseJson(jsonData : [[String : Any]]?) -&gt; ():ProductViewController.swift">
+         contextName = "ProductViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:ProductViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(productDetails[0])">
+               value = "products[indexPath.row]">
+            </PersistentString>
+            <PersistentString
+               value = "productCell?.viewWithTag(1)">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "products">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.scrollViewWillEndDragging(UIScrollView, withVelocity : CGPoint, targetContentOffset : UnsafeMutablePointer&lt;CGPoint&gt;) -&gt; ():ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "timer">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -19,19 +36,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProductViewController.tableView(UITableView, cellForRowAt : IndexPath) -&gt; UITableViewCell:ProductViewController.swift">
+         contextName = "ProductViewController.parseJson(jsonData : [[String : Any]]?) -&gt; ():ProductViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "productCell?.viewWithTag(1)">
-            </PersistentString>
-            <PersistentString
-               value = "products[indexPath.row]">
-            </PersistentString>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-            <PersistentString
-               value = "products">
+               value = "print(productDetails[0])">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
