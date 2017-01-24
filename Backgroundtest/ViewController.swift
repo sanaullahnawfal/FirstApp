@@ -44,9 +44,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }()
     
     let cellIdentifier  = "slideimage"
-    
     var slideShowImages = [UIImage]()
-    
     var timer = Timer()
     
     override func viewDidLoad() {
@@ -54,8 +52,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         locationView.layer.cornerRadius         = locationView.frame.width/2
         locationView.layer.masksToBounds        = true
-        //locationView.layer.borderWidth        = 1
-        //locationView.layer.borderColor        = UIColor.white.cgColor
         
         slideShowView.register(SlideShowCell.self, forCellWithReuseIdentifier: cellIdentifier)
         slideShow.addSubview(slideShowView)
@@ -131,7 +127,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         case offerGesture:
             performSegue(withIdentifier: "offer", sender: sender)
         case productGesture:
-            performSegue(withIdentifier: "product", sender: sender)
+            let layout = UICollectionViewFlowLayout()
+            let categoryView = CategoryViewController(collectionViewLayout: layout)
+            navigationController?.pushViewController(categoryView, animated: true)
+            //performSegue(withIdentifier: "product", sender: sender)
         case contactGesture:
             performSegue(withIdentifier: "contact", sender: sender)
         default:
