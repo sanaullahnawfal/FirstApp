@@ -10,21 +10,26 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
+struct categoryCell {
+    
+    let categoryImage: UIImage?
+    let categoryText: String?
+    
+}
+
 class CategoryViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    let categoryImages = [UIImage(named: "cat1"), UIImage(named: "cat2"),UIImage(named: "cat3"),UIImage(named: "cat4"),UIImage(named: "cat5"),UIImage(named: "cat6")]
+    
+    let categoryImagesAndText = [categoryCell.init(categoryImage: UIImage(named: "cat1"), categoryText: "Fragrance"), categoryCell.init(categoryImage: UIImage(named: "cat2"), categoryText: "Hygiene"), categoryCell.init(categoryImage: UIImage(named: "cat3"), categoryText: "Makeup"), categoryCell.init(categoryImage: UIImage(named: "cat4"), categoryText: "Skincare"), categoryCell.init(categoryImage: UIImage(named: "cat5"), categoryText: "Haircare"), categoryCell.init(categoryImage: UIImage(named: "cat6"), categoryText: "Bath")]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.title = "Categories"
-        navigationController?.navigationBar.tintColor = UIColor(red: 141/255, green: 147/255, blue: 51/255, alpha: 1.0)
-
         navigationController?.title = "Categories"
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
         navigationController?.navigationBar.tintColor = UIColor(red: 141/255, green: 147/255, blue: 51/255, alpha: 1.0)
         navigationController?.navigationBar.isTranslucent = true
-        collectionView?.backgroundColor = UIColor(red: 141/255, green: 147/255, blue: 51/255, alpha: 1.0)
+        collectionView?.backgroundColor = .white
         
         // Register cell classes
         self.collectionView!.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -40,12 +45,13 @@ class CategoryViewController: UICollectionViewController, UICollectionViewDelega
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return categoryImagesAndText.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
-        cell.categoryImage.image = categoryImages[indexPath.row]?.withRenderingMode(.alwaysOriginal)
+        cell.categoryImage.image = categoryImagesAndText[indexPath.row].categoryImage
+        cell.categoryLabel.text = categoryImagesAndText[indexPath.row].categoryText
         return cell
     }
     
