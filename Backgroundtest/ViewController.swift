@@ -128,6 +128,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             performSegue(withIdentifier: "offer", sender: sender)
         case productGesture:
             let layout = UICollectionViewFlowLayout()
+            layout.minimumInteritemSpacing = 10
             let categoryView = CategoryViewController(collectionViewLayout: layout)
             navigationController?.pushViewController(categoryView, animated: true)
             //performSegue(withIdentifier: "product", sender: sender)

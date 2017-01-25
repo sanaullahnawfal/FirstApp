@@ -10,56 +10,47 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CategoryViewController: UICollectionViewController {
+class CategoryViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+    let categoryImages = [UIImage(named: "cat1"), UIImage(named: "cat2"),UIImage(named: "cat3"),UIImage(named: "cat4"),UIImage(named: "cat5"),UIImage(named: "cat6")]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView?.backgroundColor = .white
+        navigationController?.title = "Categories"
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.black]
+        navigationController?.navigationBar.tintColor = UIColor(red: 141/255, green: 147/255, blue: 51/255, alpha: 1.0)
+        navigationController?.navigationBar.isTranslucent = true
+        collectionView?.backgroundColor = UIColor(red: 141/255, green: 147/255, blue: 51/255, alpha: 1.0)
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        self.collectionView!.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        collectionView?.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        return 6
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CategoryCollectionViewCell
+        cell.categoryImage.image = categoryImages[indexPath.row]?.withRenderingMode(.alwaysOriginal)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let navBarHeight = navigationController?.navigationBar.frame.height
+        let width = (view.frame.width-30)/2
+        let height = (view.frame.height-60-navBarHeight!)/3
+        return CGSize(width: width, height: height)
     }
 
     // MARK: UICollectionViewDelegate

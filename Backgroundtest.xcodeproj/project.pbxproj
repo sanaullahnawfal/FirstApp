@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FB0217A61E2F921E0067182C /* SlideShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0217A51E2F921E0067182C /* SlideShowCell.swift */; };
 		FB03FD611DE331BD0027F8E8 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03FD601DE331BD0027F8E8 /* LocationViewController.swift */; };
+		FB11973A1E38E10A001C956A /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1197391E38E10A001C956A /* CategoryCollectionViewCell.swift */; };
 		FB48BCF41DE483C2000324F0 /* NewArrivalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BCF31DE483C2000324F0 /* NewArrivalViewController.swift */; };
 		FB48BCF61DE483D4000324F0 /* OfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BCF51DE483D4000324F0 /* OfferViewController.swift */; };
 		FB48BCF81DE483DF000324F0 /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB48BCF71DE483DF000324F0 /* ProductViewController.swift */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		FB0217A51E2F921E0067182C /* SlideShowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideShowCell.swift; sourceTree = "<group>"; };
 		FB03FD601DE331BD0027F8E8 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		FB1197391E38E10A001C956A /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB48BCF31DE483C2000324F0 /* NewArrivalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewArrivalViewController.swift; sourceTree = "<group>"; };
 		FB48BCF51DE483D4000324F0 /* OfferViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferViewController.swift; sourceTree = "<group>"; };
 		FB48BCF71DE483DF000324F0 /* ProductViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				FBE77EC21DE7291000975165 /* ProductCell.swift */,
 				FB4FC5791DF45F9B00FCA231 /* StoreCell.swift */,
 				FB0217A51E2F921E0067182C /* SlideShowCell.swift */,
+				FB1197391E38E10A001C956A /* CategoryCollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB0217A61E2F921E0067182C /* SlideShowCell.swift in Sources */,
+				FB11973A1E38E10A001C956A /* CategoryCollectionViewCell.swift in Sources */,
 				FBBB22A21DCA27B6003DE009 /* ViewController.swift in Sources */,
 				FB9E38341E379AD900FA13EA /* CategoryViewController.swift in Sources */,
 				FB48BCFA1DE483EB000324F0 /* ContactViewController.swift in Sources */,
