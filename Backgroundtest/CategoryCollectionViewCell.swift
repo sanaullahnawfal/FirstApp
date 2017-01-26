@@ -22,6 +22,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     let categoryLabel: UILabel = {
         
         let label = UILabel()
+        label.textAlignment = .center
         return label
         
     }()
@@ -29,11 +30,17 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(categoryImage)
+        addSubview(categoryLabel)
+        categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         categoryImage.translatesAutoresizingMaskIntoConstraints = false
         categoryImage.topAnchor.constraint(equalTo: (contentView.topAnchor)).isActive = true
-        categoryImage.bottomAnchor.constraint(equalTo: (contentView.bottomAnchor)).isActive = true
+        categoryImage.bottomAnchor.constraint(equalTo: (categoryLabel.topAnchor)).isActive = true
         categoryImage.leftAnchor.constraint(equalTo: (contentView.leftAnchor)).isActive = true
         categoryImage.rightAnchor.constraint(equalTo: (contentView.rightAnchor)).isActive = true
+        categoryLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        categoryLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        categoryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        categoryLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {
