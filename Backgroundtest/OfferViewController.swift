@@ -15,6 +15,8 @@ class OfferViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Our Offers"
+        navigationController?.navigationBar.tintColor = UIColor(red: 141/255, green: 147/255, blue: 51/255, alpha: 1.0)
         let url = URL(string: "https://s3.amazonaws.com/online.fliphtml5.com/defk/qmty/index.html")
         let request = URLRequest(url: url!)
         offerLeaflet.loadRequest(request)

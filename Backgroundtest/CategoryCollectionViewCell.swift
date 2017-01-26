@@ -23,6 +23,10 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         
         let label = UILabel()
         label.textAlignment = .center
+        label.textColor = .white
+        label.backgroundColor = UIColor(red: 141/255, green: 147/255, blue: 51/255, alpha: 1.0)
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor(red: 141/255, green: 125/255, blue: 51/255, alpha: 1.0).cgColor
         return label
         
     }()
