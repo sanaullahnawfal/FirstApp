@@ -140,16 +140,27 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     private func fetchSlideShowImages() {
-        
         var imageURL = [String]()
         for i in 1...4 {
             imageURL.append("http://www.mybatool.com/app/slideshow/" + String(i) + ".jpg")
         }
         for url in imageURL {
-            let image = ProductViewController.convertURLToImage(imageUrl: url)
-            slideShowImages.append(image)
+            let task = URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { (data, response, error) in
+                
+                if error != nil {
+                    print("There is some error")
+                    return
+                } else {
+                    if let data = data, let image = UIImage(data: data) {
+                        self.slideShowImages.append(image)
+                        DispatchQueue.main.async {
+                            self.slideShowView.reloadData()
+                        }
+                    }
+                }
+            })
+            task.resume()
         }
-        
     }
     
     func autoScroll() {
